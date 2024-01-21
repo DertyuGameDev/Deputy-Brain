@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23cc034f239871459b054da27844e2b, type: 3}
+  m_Name: CallTest2
+  m_EditorClassIdentifier: 
+  NPConversations: Test2 dsfbnfdgnouhaskbfc
+  Choices:
+  - 3
+  - 4
+  - 5
+  transitions:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  PrefChoice: {fileID: 5217021621987822600, guid: e67bd9e5dbaa37d41ae1cca07ca8cb92, type: 3}

@@ -12,7 +12,7 @@ public class RayDetail : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             l = hit.collider.gameObject;
-            if (l.tag == "Detail" || l.tag == "Map" || l.tag == "TV")
+            if (l.tag == "Detail" || l.tag == "Map" || l.tag == "TV" || l.transform.childCount > 0)
             {
                 may = false;
             }

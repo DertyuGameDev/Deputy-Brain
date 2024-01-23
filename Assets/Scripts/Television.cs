@@ -6,7 +6,8 @@ using TMPro;
 public class Television : MonoBehaviour
 {
     public static Scene scene;
-    public static bool IsStart = false;
+    public Scene Starter, end;
+    public static bool IsStart = true;
     public Image picture;
     public TextMeshProUGUI title;
     public TextMeshProUGUI contiinue;
@@ -24,6 +25,8 @@ public class Television : MonoBehaviour
     }
     private void Start()
     {
+        scene = Starter;
+        Clock.CanGo = false;
         ind = 0;
     }
     public void Update()
@@ -34,6 +37,12 @@ public class Television : MonoBehaviour
             StartCoroutine(TypeSyble(scene.text[ind]));
             picture.sprite = scene.picture[ind];
             IsStart = false;
+        }
+        if (Clock.day == 2 && Clock.hour == 23)
+        {
+            IsStart = true;
+            scene = end;
+            Clock.hour = 7;
         }
     }
     public void Continue()
@@ -56,6 +65,9 @@ public class Television : MonoBehaviour
         {
             contiinue.text = "Continue";
             Clock.CanGo = true;
+            Clock.hour = 7;
+            Clock.second = 0;
+            Clock.day += 1;
             Clock.f();
             ind = 0;
         }

@@ -3,39 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-public class dRAGdROP : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+using System;
+using Random = UnityEngine.Random;
+
+public class dRAGdROP : MonoBehaviour
 {
     public static Scene s;
     RectTransform rect;
     GameObject canvas;
     GameObject spawn;
     Image i;
-    public LayerMask l;
-    public void OnBeginDrag(PointerEventData eventData)
+    public Change ch;
+    public LayerMask l, grid, book;
+    public string text;
+    public enum Change
     {
-        rect.SetParent(canvas.transform);
-        i.raycastTarget = false;
+        kaseta,
+        energy,
+        page
     }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        rect.anchoredPosition += eventData.delta;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
+    public void Check()
     {
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(r, out RaycastHit hit, 1000, l))
+        if (ch == Change.kaseta)
         {
-            Television.scene = s;
-            Television.IsStart = true;
-            Destroy(this.gameObject);
+            if (Physics.Raycast(r, out RaycastHit hit, 1000, l))
+            {
+                Television.scene = s;
+                Television.IsStart = true;
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                rect.SetParent(spawn.transform);
+                rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                i.raycastTarget = true;
+            }
         }
-        else
+        else if (ch == Change.energy)
         {
-            rect.SetParent(spawn.transform);
-            rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
-            i.raycastTarget = true;
+            if (Physics.Raycast(r, out RaycastHit hit, 1000, grid))
+            {
+                ActiveGrid.ind += 1;
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                rect.SetParent(spawn.transform);
+                rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                i.raycastTarget = true;
+            }
+        }
+        else if (ch == Change.page)
+        {
+            if (Physics.Raycast(r, out RaycastHit hit, 1000, book))
+            {
+                Share.book.GetComponent<Book>().add(text);
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                rect.SetParent(spawn.transform);
+                rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                i.raycastTarget = true;
+            }
         }
     }
     void Start()

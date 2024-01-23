@@ -10,6 +10,8 @@ TagManager:
   - Canvas
   - OptionChoice
   - EDA
+  - Sel
+  - Shield
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - TV
   - L
   - Numb
-  - 
-  - 
+  - Book
+  - Eq
   - 
   - 
   - 

@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
+using System;
+
 public class Book : MonoBehaviour, IDragHandler
 {
     RectTransform rect;
@@ -11,6 +13,7 @@ public class Book : MonoBehaviour, IDragHandler
     public List<string> pages;
     public int ind = 0;
     public TextMeshProUGUI left, right;
+    public Action<string> add;
     public void OnDrag(PointerEventData eventData)
     {
         rect.anchoredPosition += eventData.delta;
@@ -20,6 +23,7 @@ public class Book : MonoBehaviour, IDragHandler
         rect = GetComponent<RectTransform>();
         left.text = pages[ind];
         right.text = pages[ind + 1];
+        add += AddPage;
     }
     private void Update()
     {
@@ -51,5 +55,16 @@ public class Book : MonoBehaviour, IDragHandler
         ind = 0;
         left.text = pages[ind];
         right.text = pages[ind + 1];
+    }
+    public void AddPage(string text)
+    {
+        if (pages[pages.Count - 1] == "")
+        {
+            pages[pages.Count - 1] = text;
+        }
+        else
+        {
+            pages.Add(text);
+        }
     }
 }

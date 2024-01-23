@@ -16,7 +16,7 @@ public class StartDialogue : MonoBehaviour
     public static Action<Transition> update;
     private void Start()
     {
-        update += Continue;;
+        update += Continue;
     }
     public void Click()
     {

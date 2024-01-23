@@ -9,8 +9,8 @@ using TMPro;
 public class Active_option : MonoBehaviour
 {
     public Image lamp;
+    private int t;
     public Slider slider;
-    public bool IsDeleted = false;
     public int timer;
     public List<GameObject> details;
     public List<int> position;
@@ -22,12 +22,17 @@ public class Active_option : MonoBehaviour
         a = activeEvent;
         if (activeEvent != null)
         {
+            if (activeEvent.timeHour > t)
+            {
+                t = activeEvent.timeHour;
+            }
             timer = activeEvent.timeHour;
             details = activeEvent.detail.ToList();
             position = activeEvent.position.ToList();
         }
-        if (activeEvent != null && timer <= 0)
+        if (activeEvent != null && timer == 0)
         {
+            activeEvent.timeHour = t;
             activeEvent = null;
             timer = 0;
             details = null;
@@ -35,7 +40,7 @@ public class Active_option : MonoBehaviour
             slider.value = 0;
             Destroy(p);
             p = null;
-            // רענאפ
+            Fines.fines += 1;
         }
         if(slider.value == 1 && activeEvent != null)
         {
@@ -85,7 +90,7 @@ public class Active_option : MonoBehaviour
                 }
                 if (details[i].name == "ÊÏ")
                 {
-                    if (details[i].transform.GetChild(4).GetComponent<Slider>().value != position[i] && position[i] != -1)
+                    if (details[i].transform.GetChild(5).GetComponent<Slider>().value != position[i] && position[i] != -1)
                     {
                         IsOk = false;
                         break;
@@ -113,7 +118,7 @@ public class Active_option : MonoBehaviour
                 slider.value = 0;
                 Destroy(p);
                 p = null;
-                //רענאפ
+                Fines.fines += 1;
             }
         }
         else

@@ -33,7 +33,7 @@ public class EventsSystem : MonoBehaviour
         {
             for (int i = 0; i < events.Length; i++)
             {
-                if (events[i].nameEvent == "ÅÄÀ" && t.IsDeleted == false)
+                if (events[i].nameEvent == "ÅÄÀ")
                 {
                     Active_option.activeEvent = events[i];
                     break;

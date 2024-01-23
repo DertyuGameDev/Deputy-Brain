@@ -6,9 +6,12 @@ using UnityEngine.EventSystems;
 public class Item : MonoBehaviour
 {
     public GameObject Drag;
+    GameObject par;
     public bool Onec = true;
+    public bool EQ = true;
     public LayerMask LayerMask;
     public LayerMask Slot;
+    public LayerMask Equipment;
     private Vector3 pos = new Vector3(0, 0, 0);
     private void Start()
     {
@@ -19,22 +22,33 @@ public class Item : MonoBehaviour
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0) && Onec == false && Drag != null)
         {
-            bool m = true;
-            for (int i = 0; i < Drag.transform.childCount; i++)
+            if (EQ == false)
             {
-                if (Drag.transform.GetChild(i).GetComponent<RayDetail>() && Drag.transform.GetChild(i).gameObject.GetComponent<RayDetail>().may == false)
+                bool m = true;
+                for (int i = 0; i < Drag.transform.childCount; i++)
                 {
-                    m = false; break;
+                    if (Drag.transform.GetChild(i).GetComponent<RayDetail>() && Drag.transform.GetChild(i).gameObject.GetComponent<RayDetail>().may == false)
+                    {
+                        m = false; break;
+                    }
+                }
+                if (m)
+                {
+                    Drag.transform.SetParent(Drag.transform.GetChild(0).gameObject.GetComponent<RayDetail>().l.transform, true);
+                    Drag.transform.localPosition = Vector3.zero;
+                    Drag.transform.rotation = Quaternion.Euler(pos);
+                    Drag.transform.parent.SetAsLastSibling();
+                    Drag = null;
+                    pos = new Vector3(0, 0, 0);
+                    Onec = true;
                 }
             }
-            if (m)
+            else
             {
-                Drag.transform.SetParent(Drag.transform.GetChild(0).gameObject.GetComponent<RayDetail>().l.transform, true);
-                Drag.transform.localPosition = Vector3.zero;
-                Drag.transform.rotation = Quaternion.Euler(pos);
+                Drag.GetComponent<dRAGdROP>().Check();
                 Drag = null;
-                pos = new Vector3(0, 0, 0);
                 Onec = true;
+                EQ = false;
             }
         }
         else
@@ -43,7 +57,7 @@ public class Item : MonoBehaviour
             {
                 if (Physics.Raycast(r, out RaycastHit hit, 1000, LayerMask))
                 {
-                    if (Onec)
+                    if (Onec && hit.collider.gameObject.tag == "Detail")
                     {
                         Drag = hit.collider.gameObject;
                         Onec = false;
@@ -53,11 +67,25 @@ public class Item : MonoBehaviour
                         Drag.transform.parent.parent.SetAsLastSibling();
                     }
                 }
+                else if (Physics.Raycast(r, out RaycastHit h, 1000, Equipment))
+                {
+                    if (Onec)
+                    {
+                        EQ = true;
+                        Drag = h.collider.gameObject;
+                        Onec = false;
+                        par = Drag.transform.parent.gameObject;
+                        Drag.transform.SetParent(Drag.transform.parent.parent.parent);
+                        Drag.transform.SetAsLastSibling();
+                        Drag.transform.parent.SetAsLastSibling();
+                        Drag.transform.parent.parent.SetAsLastSibling();
+                    }
+                }
             }
         }
         if (Input.GetMouseButtonDown(1))
         {
-            if(Drag != null)
+            if(Drag != null && EQ == false)
             {
                 pos += new Vector3(0, 0, -90);
             }

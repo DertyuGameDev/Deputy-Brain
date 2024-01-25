@@ -14,6 +14,7 @@ public class StartDialogue : MonoBehaviour
     public TextMeshProUGUI conv;
     public GameObject spawner, phone;
     public static Action<Transition> update;
+    public GameObject portrait;
     private void Start()
     {
         update += Continue;
@@ -24,6 +25,7 @@ public class StartDialogue : MonoBehaviour
         ind = Clock.indPhone;
         BaseStarters[ind].Starter(conv, spawner);
         StartCoroutine(TypeSyble(conv, BaseStarters[ind].NPConversations));
+        portrait.SetActive(true);
         phone.SetActive(false);
     }
     public void Continue(Transition newConv)
@@ -51,6 +53,7 @@ public class StartDialogue : MonoBehaviour
                 Destroy(obj[i]);
             }
             conv.text = "";
+            portrait.SetActive(false);
             background.gameObject.SetActive(false);
         }
     }

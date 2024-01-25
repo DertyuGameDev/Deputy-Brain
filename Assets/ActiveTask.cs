@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class ActiveTask : MonoBehaviour
 {
-    public Animator animator;
     bool Op = true;
     public void B(GameObject g)
     {
-        animator.SetBool("OpenTask", Op);
+        if (Op == true)
+        {
+            g.GetComponent<RectTransform>().anchoredPosition = Vector3.zero + new Vector3(0, 0, -17);
+        }
+        else
+        {
+            g.GetComponent<RectTransform>().anchoredPosition = new Vector3(90000, 0, -17);
+        }
         Op = !Op;
     }
 }

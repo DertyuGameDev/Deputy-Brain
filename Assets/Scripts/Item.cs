@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
     public GameObject Drag;
-    GameObject par;
+    public GameObject par;
     public bool Onec = true;
     public bool EQ = true;
     public LayerMask LayerMask;
@@ -20,6 +21,10 @@ public class Item : MonoBehaviour
     void Update()
     {
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(r, out RaycastHit hi, 1000, LayerMask))
+        {
+            par = hi.collider.gameObject;
+        }
         if (Input.GetMouseButtonDown(0) && Onec == false && Drag != null)
         {
             if (EQ == false)
@@ -38,6 +43,18 @@ public class Item : MonoBehaviour
                     Drag.transform.localPosition = Vector3.zero;
                     Drag.transform.rotation = Quaternion.Euler(pos);
                     Drag.transform.parent.SetAsLastSibling();
+                    if (Drag.name == "T")
+                    {
+                        Drag.transform.GetChild(7).GetComponent<Slider>().enabled = true;
+                    }
+                    else if (Drag.name == "ÊÂ")
+                    {
+                        Drag.transform.GetChild(7).GetComponent<Slider>().enabled = true;
+                    }
+                    else if (Drag.name == "ÊÏ")
+                    {
+                        Drag.transform.GetChild(7).GetComponent<Slider>().enabled = true;
+                    }
                     Drag = null;
                     pos = new Vector3(0, 0, 0);
                     Onec = true;
@@ -65,6 +82,18 @@ public class Item : MonoBehaviour
                         Drag.transform.SetAsLastSibling();
                         Drag.transform.parent.SetAsLastSibling();
                         Drag.transform.parent.parent.SetAsLastSibling();
+                        if (Drag.name == "T")
+                        {
+                            Drag.transform.GetChild(7).GetComponent<Slider>().enabled = false;
+                        }
+                        else if (Drag.name == "ÊÂ")
+                        {
+                            Drag.transform.GetChild(7).GetComponent<Slider>().enabled = false;
+                        }
+                        else if (Drag.name == "ÊÏ")
+                        {
+                            Drag.transform.GetChild(7).GetComponent<Slider>().enabled = false;
+                        }
                     }
                 }
                 else if (Physics.Raycast(r, out RaycastHit h, 1000, Equipment))
@@ -74,7 +103,6 @@ public class Item : MonoBehaviour
                         EQ = true;
                         Drag = h.collider.gameObject;
                         Onec = false;
-                        par = Drag.transform.parent.gameObject;
                         Drag.transform.SetParent(Drag.transform.parent.parent.parent);
                         Drag.transform.SetAsLastSibling();
                         Drag.transform.parent.SetAsLastSibling();
@@ -92,7 +120,7 @@ public class Item : MonoBehaviour
         }
         if (Drag != null)
         {
-            Drag.transform.position = Vector3.Lerp(Drag.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) + Vector3.forward, 10f * Time.deltaTime);
+            Drag.transform.position = Vector3.Lerp(Drag.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition) + new Vector3(0, 0, 0.3f), 10f * Time.deltaTime);
             Drag.transform.localRotation = Quaternion.RotateTowards(Drag.transform.rotation, Quaternion.Euler(pos), 540 * Time.deltaTime);
         }
     }

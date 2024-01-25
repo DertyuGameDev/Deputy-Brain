@@ -8,11 +8,15 @@ public class RayDetail : MonoBehaviour
     public GameObject l;
     void Update()
     {
-        Ray ray = new Ray(this.transform.position, Vector3.forward * 1000);
+        Ray ray = new Ray(this.transform.position + Vector3.forward, Vector3.forward * 1000);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             l = hit.collider.gameObject;
-            if (l.tag == "Detail" || l.tag == "Map" || l.tag == "TV" || l.transform.childCount > 0)
+            if(l == this.transform.parent.parent.gameObject)
+            {
+                may = true;
+            }
+            else if (l.tag == "Detail" || l.tag == "Map" || l.tag == "TV" || l.transform.childCount > 0 || l.layer == LayerMask.GetMask("Details"))
             {
                 may = false;
             }

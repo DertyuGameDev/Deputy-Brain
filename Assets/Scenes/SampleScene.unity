@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1837,8 +1837,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 370.67993, y: -430.44998}
-  m_SizeDelta: {x: 283.96, y: 219.09}
+  m_AnchoredPosition: {x: 301.69, y: -433.09}
+  m_SizeDelta: {x: 382.45, y: 213.71}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &149918751
 MonoBehaviour:
@@ -9216,8 +9216,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -736.76, y: -327.03}
-  m_SizeDelta: {x: 316.36, y: 387.18}
+  m_AnchoredPosition: {x: -751.64, y: -310.68}
+  m_SizeDelta: {x: 385.06, y: 423.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &750316772
 MonoBehaviour:
@@ -12166,8 +12166,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 671.4604, y: 62.760002}
-  m_SizeDelta: {x: 503.92, y: 438.74}
+  m_AnchoredPosition: {x: 661.78, y: 59.28}
+  m_SizeDelta: {x: 523.29, y: 361.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1034538530
 MonoBehaviour:
@@ -13400,8 +13400,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -722.74, y: 349.72}
-  m_SizeDelta: {x: 344.4, y: 262.64}
+  m_AnchoredPosition: {x: -736.87, y: 360.5}
+  m_SizeDelta: {x: 419.78, y: 320.13}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093844060
 MonoBehaviour:
@@ -14947,7 +14947,7 @@ GameObject:
   - component: {fileID: 1219804203}
   - component: {fileID: 1219804205}
   m_Layer: 5
-  m_Name: Dialogue
+  m_Name: Dialogue UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14988,15 +14988,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0.6117647}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 9b61030ce235fd148963d3a5ece6a2ea, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -18289,8 +18289,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.0375, y: 109.25}
-  m_SizeDelta: {x: 1014.6, y: 672.22}
+  m_AnchoredPosition: {x: 1.0375, y: 106.73}
+  m_SizeDelta: {x: 1014.6, y: 693.48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1462799492
 MonoBehaviour:
@@ -20155,6 +20155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
   m_HorizontalAxis: Horizontal
   m_VerticalAxis: Vertical
   m_SubmitButton: Submit
@@ -23041,8 +23042,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -346, y: -334.99}
-  m_SizeDelta: {x: 327.25, y: 113.98}
+  m_AnchoredPosition: {x: -308, y: -339}
+  m_SizeDelta: {x: 301.43, y: 162.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1884196171
 MonoBehaviour:

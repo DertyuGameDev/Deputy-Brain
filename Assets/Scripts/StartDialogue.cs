@@ -15,18 +15,43 @@ public class StartDialogue : MonoBehaviour
     public GameObject spawner, phone;
     public static Action<Transition> update;
     public GameObject portrait;
+    public Image lamp;
+    public Sprite grey;
+    public GameObject pause;
     private void Start()
     {
         update += Continue;
     }
-    public void Click()
+    public void RandomWin(PhoneCall problem)
     {
         background.gameObject.SetActive(true);
-        ind = Clock.indPhone;
-        BaseStarters[ind].Starter(conv, spawner);
-        StartCoroutine(TypeSyble(conv, BaseStarters[ind].NPConversations));
+        problem.Starter(conv, spawner);
+        StartCoroutine(TypeSyble(conv, problem.NPConversations));
         portrait.SetActive(true);
         phone.SetActive(false);
+    }
+    public void Click()
+    {
+        if (Active_option.problem == true)
+        {
+            PhoneCall problem = Active_option.actPhoneCall;
+            background.gameObject.SetActive(true);
+            problem.Starter(conv, spawner);
+            StartCoroutine(TypeSyble(conv, problem.NPConversations));
+            portrait.SetActive(true);
+            phone.SetActive(false);
+            Active_option.problem = false;
+            lamp.sprite = grey;
+        }
+        else
+        {
+            background.gameObject.SetActive(true);
+            ind = Clock.indPhone;
+            BaseStarters[ind].Starter(conv, spawner);
+            StartCoroutine(TypeSyble(conv, BaseStarters[ind].NPConversations));
+            portrait.SetActive(true);
+            phone.SetActive(false);
+        }
     }
     public void Continue(Transition newConv)
     {
@@ -47,6 +72,7 @@ public class StartDialogue : MonoBehaviour
         }
         else
         {
+            Clock.f(Clock.hour, Clock.second);
             GameObject[] obj = GameObject.FindGameObjectsWithTag("OptionChoice");
             for (int i = 0; i < obj.Length; i++)
             {
@@ -55,6 +81,7 @@ public class StartDialogue : MonoBehaviour
             conv.text = "";
             portrait.SetActive(false);
             background.gameObject.SetActive(false);
+            pause.SetActive(false);
         }
     }
     public IEnumerator TypeSyble(TextMeshProUGUI conv, string sentense)

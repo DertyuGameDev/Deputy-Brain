@@ -15,18 +15,19 @@ public class Clock : MonoBehaviour
     public Image newDay;
     public static int hour, second;
     public GameObject Kaseta, Energy, Page;
+    public List<GameObject> pages = new List<GameObject>();
     public Transform spawner;
     public Scene[] scene;
     public GameObject phone, diskPhone;
     public Animator phoneAnim;
     public static int ind = 0;
     public static int indPhone = 0;
-    public static Action f;
+    public static Action<int, int> f;
     void Start()
     {
         f += OnTimeTracker;
         second = 0;
-        hour = 17;
+        hour = 7;
         StartCoroutine(timeTicker());
     }
 
@@ -34,7 +35,7 @@ public class Clock : MonoBehaviour
     {
         if (CanGo)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
             if (hour == 15 && second == 0)
             {
                 indPhone += 1;
@@ -52,6 +53,7 @@ public class Clock : MonoBehaviour
                 }
                 GameObject p1 = Instantiate(Page, spawner);
                 p1.transform.SetParent(spawner.transform);
+                p1.GetComponent<dRAGdROP>().page = pages[ind - 1];
                 p1.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
             }
             if (hour == 23)
@@ -77,12 +79,12 @@ public class Clock : MonoBehaviour
         d = day;
         clock.text = hour.ToString("D2") + ":" + second.ToString("D2");
     }
-    public void OnTimeTracker()
+    public void OnTimeTracker(int h, int s)
     {
         CanGo = true;
         StartCoroutine(timeTicker());
-        second = 0;
-        hour = 7;
+        second = s;
+        hour = h;
         newDay.gameObject.SetActive(false);
     }
     public void MinusTime()

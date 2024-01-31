@@ -12,6 +12,7 @@ TagManager:
   - EDA
   - Sel
   - Shield
+  - pages
   layers:
   - Default
   - TransparentFX

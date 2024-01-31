@@ -5,18 +5,23 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using Random = UnityEngine.Random;
 
 public class Active_option : MonoBehaviour
 {
     public Image lamp;
+    public Sprite gray, red, green, yellow;
     private int t;
     public Slider slider;
-    public int timer;
-    public List<GameObject> details;
-    public List<int> position;
+    int timer;
+    List<GameObject> details;
+    List<int> position;
     public static Event activeEvent;
     public Event a;
-    public GameObject p;
+    public GameObject p, phone;
+    public static bool problem;
+    public PhoneCall[] phoneCall;
+    public static PhoneCall actPhoneCall;
     private void Update()
     {
         a = activeEvent;
@@ -29,6 +34,7 @@ public class Active_option : MonoBehaviour
             timer = activeEvent.timeHour;
             details = activeEvent.detail.ToList();
             position = activeEvent.position.ToList();
+            lamp.sprite = yellow;
         }
         if (activeEvent != null && timer == 0)
         {
@@ -40,6 +46,7 @@ public class Active_option : MonoBehaviour
             slider.value = 0;
             Destroy(p);
             p = null;
+            StartCoroutine(color(red, gray));
             Fines.fines += 1;
         }
         if(slider.value == 1 && activeEvent != null)
@@ -90,7 +97,7 @@ public class Active_option : MonoBehaviour
                 }
                 if (details[i].name == " œ")
                 {
-                    if (details[i].transform.GetChild(5).GetComponent<Slider>().value != position[i] && position[i] != -1)
+                    if (details[i].transform.GetChild(7).GetComponent<Slider>().value != position[i] && position[i] != -1)
                     {
                         IsOk = false;
                         break;
@@ -103,7 +110,19 @@ public class Active_option : MonoBehaviour
                 timer = 0;
                 details = null;
                 position = null;
-                lamp.color = Color.green;
+                int r = 51;
+                if (r > 50)
+                {
+                    problem = true;
+                    actPhoneCall = phoneCall[0];
+                    phone.SetActive(true);
+                }
+                else
+                {
+                    problem = false;
+                    actPhoneCall = null;
+                    StartCoroutine(color(green, gray));
+                }
                 slider.value = 0;
                 Destroy(p);
                 p = null;
@@ -114,7 +133,7 @@ public class Active_option : MonoBehaviour
                 timer = 0;
                 details = null;
                 position = null;
-                lamp.color = Color.red;
+                StartCoroutine(color(red, gray));
                 slider.value = 0;
                 Destroy(p);
                 p = null;
@@ -125,5 +144,11 @@ public class Active_option : MonoBehaviour
         {
             slider.value = 0;
         }
+    }
+    public IEnumerator color(Sprite k1, Sprite k2)
+    {
+        lamp.sprite = k1;
+        yield return new WaitForSeconds(1);
+        lamp.sprite = k2;
     }
 }

@@ -15,7 +15,7 @@ public class dRAGdROP : MonoBehaviour
     Image i;
     public Change ch;
     public LayerMask l, grid, book;
-    public string text;
+    public GameObject page;
     public enum Change
     {
         kaseta,
@@ -58,7 +58,7 @@ public class dRAGdROP : MonoBehaviour
         {
             if (Physics.Raycast(r, out RaycastHit hit, 1000, book))
             {
-                Share.book.GetComponent<Book>().add(text);
+                Share.book.GetComponent<Book>().add(page);
                 Destroy(this.gameObject);
             }
             else

@@ -9,11 +9,11 @@ using System;
 public class Book : MonoBehaviour, IDragHandler
 {
     RectTransform rect;
-    [TextArea]
-    public List<string> pages;
+    public Transform leftsp, rightsp;
+    public List<GameObject> pages;
     public int ind = 0;
-    public TextMeshProUGUI left, right;
-    public Action<string> add;
+    public GameObject empty;
+    public Action<GameObject> add;
     public void OnDrag(PointerEventData eventData)
     {
         rect.anchoredPosition += eventData.delta;
@@ -21,15 +21,15 @@ public class Book : MonoBehaviour, IDragHandler
     void Start()
     {
         rect = GetComponent<RectTransform>();
-        left.text = pages[ind];
-        right.text = pages[ind + 1];
+        Instantiate(pages[ind], leftsp);
+        Instantiate(pages[ind + 1], rightsp);
         add += AddPage;
     }
     private void Update()
     {
         if (pages.Count % 2 != 0)
         {
-            pages.Add("");
+            pages.Add(empty);
         }
     }
     public void forward()
@@ -37,8 +37,10 @@ public class Book : MonoBehaviour, IDragHandler
         if (ind + 2 <= pages.Count - 2)
         {
             ind += 2;
-            left.text = pages[ind];
-            right.text = pages[ind + 1];
+            Destroy(leftsp.GetChild(0).gameObject);
+            Destroy(rightsp.GetChild(0).gameObject);
+            Instantiate(pages[ind], leftsp);
+            Instantiate(pages[ind + 1], rightsp);
         }
     }
     public void back()
@@ -46,25 +48,29 @@ public class Book : MonoBehaviour, IDragHandler
         if (ind - 2 >= 0)
         {
             ind -= 2;
-            left.text = pages[ind];
-            right.text = pages[ind + 1];
+            Destroy(leftsp.GetChild(0).gameObject);
+            Destroy(rightsp.GetChild(0).gameObject);
+            Instantiate(pages[ind], leftsp);
+            Instantiate(pages[ind + 1], rightsp);
         }
     }
     public void first()
     {
         ind = 0;
-        left.text = pages[ind];
-        right.text = pages[ind + 1];
+        Destroy(leftsp.GetChild(0).gameObject);
+        Destroy(rightsp.GetChild(0).gameObject);
+        Instantiate(pages[ind], leftsp);
+        Instantiate(pages[ind + 1], rightsp);
     }
-    public void AddPage(string text)
+    public void AddPage(GameObject page)
     {
-        if (pages[pages.Count - 1] == "")
+        if (pages[pages.Count - 1] == empty)
         {
-            pages[pages.Count - 1] = text;
+            pages[pages.Count - 1] = page;
         }
         else
         {
-            pages.Add(text);
+            pages.Add(page);
         }
     }
 }

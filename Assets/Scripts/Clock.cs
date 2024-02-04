@@ -47,8 +47,11 @@ public class Clock : MonoBehaviour
             if (hour == 23)
             {
                 sleepwake = true;
+<<<<<<< HEAD
                 dRAGdROP.s = scene[ind];
                 ind += 1;
+=======
+>>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
                 Instantiate(Kaseta, spawner);
                 Instantiate(Energy, spawner);
                 CanGo = false;
@@ -66,6 +69,11 @@ public class Clock : MonoBehaviour
             if (hour == 7 && second == 0)
             {
                 sleepwake = true;
+<<<<<<< HEAD
+=======
+                dRAGdROP.s = scene[ind];
+                ind += 1;
+>>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
                 if (day > 1)
                 {
                     GameObject p = Instantiate(Energy, spawner);

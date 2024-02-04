@@ -27,7 +27,11 @@ public class dRAGdROP : MonoBehaviour
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (ch == Change.kaseta)
         {
+<<<<<<< HEAD
             if (Physics.Raycast(r, out RaycastHit hit, 1000, l) && GameObject.FindGameObjectWithTag("task").transform.childCount < 1)
+=======
+            if (Physics.Raycast(r, out RaycastHit hit, 1000, l) )
+>>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
             {
                 Television.scene = s;
                 Television.IsStart = true;

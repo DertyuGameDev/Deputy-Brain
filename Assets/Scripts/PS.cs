@@ -35,7 +35,11 @@ public class PS : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("SLEEP") != null)
         {
             p = GameObject.FindGameObjectWithTag("SLEEP");
+<<<<<<< HEAD
             p.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = sleep.position[0].ToString();
+=======
+            p.transform.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = s.position[0].ToString();
+>>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
         }
     }
     public void Checker()
@@ -73,6 +77,11 @@ public class PS : MonoBehaviour
             }
             else
             {
+<<<<<<< HEAD
+=======
+                sleep = null;
+                position = 0;
+>>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
                 StartCoroutine(color(red, gray));
                 slider.value = 0;
                 Fines.fines += 1;

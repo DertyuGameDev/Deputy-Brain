@@ -14,10 +14,7 @@ TagManager:
   - Shield
   - pages
   - SLEEP
-<<<<<<< HEAD
   - task
-=======
->>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
   layers:
   - Default
   - TransparentFX

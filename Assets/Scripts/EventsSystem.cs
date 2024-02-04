@@ -69,7 +69,6 @@ public class EventsSystem : MonoBehaviour
             if (Clock.hour == 7) {
                 l[0] = 0;
             }
-<<<<<<< HEAD
             else if(Clock.hour == 23)
             {
                 l[0] = 1;
@@ -77,22 +76,11 @@ public class EventsSystem : MonoBehaviour
             }
             Event a = new Event(PS.sleep.nameEvent, 0, l.ToList(), g.ToList());
             PS.sleep = a;
-=======
-            else
-            {
-                l[0] = 1;
-            }
-            Event a = new Event(PS.sleep.nameEvent, 0, l.ToList(), g.ToList());
->>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
             if (Clock.hour == 7)
             {
                 prefabsEvents[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Пора просыпаться!";
             }
-<<<<<<< HEAD
             else if (Clock.hour == 23)
-=======
-            else
->>>>>>> c6e024004757b7c2c69d36cec401489adc4fa18c
             {
                 prefabsEvents[1].transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Идите спать!";
             }

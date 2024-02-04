@@ -65,8 +65,8 @@ public class Television : MonoBehaviour
         {
             contiinue.text = "Continue";
             Clock.CanGo = true;
-            Clock.day += 1;
             Clock.f(7, 0);
+            Clock.day += 1;
             ind = 0;
         }
     }

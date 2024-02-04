@@ -149,7 +149,7 @@ GameObject:
   - component: {fileID: 3174512289238442121}
   m_Layer: 3
   m_Name: Last
-  m_TagString: Untagged
+  m_TagString: pages
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

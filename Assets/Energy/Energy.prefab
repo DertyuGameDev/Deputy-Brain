@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1720882279403354215}
   - component: {fileID: 1720882279403354213}
   - component: {fileID: 5644331206323848549}
+  - component: {fileID: 3654458259451739214}
   m_Layer: 11
   m_Name: Energy
   m_TagString: Untagged
@@ -27,9 +28,9 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720882279403354217}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9999998, y: 0.9999998, z: 0.9999998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,7 +101,7 @@ MonoBehaviour:
   book:
     serializedVersion: 2
     m_Bits: 0
-  text: 
+  page: {fileID: 0}
 --- !u!65 &5644331206323848549
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -114,3 +115,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 99.82793, y: 100.53914, z: 1}
   m_Center: {x: -0.0132882, y: -0.009968162, z: 0}
+--- !u!54 &3654458259451739214
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720882279403354217}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0

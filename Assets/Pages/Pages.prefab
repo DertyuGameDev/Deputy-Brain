@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7594692903559230686}
   - component: {fileID: 7594692903559230624}
   - component: {fileID: 1241165052588080286}
+  - component: {fileID: 3532514992302261828}
   m_Layer: 11
   m_Name: Pages
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   book:
     serializedVersion: 2
     m_Bits: 1024
-  text: "\u041D\u043E\u0432\u0430\u044F \u0441\u0442\u0440\u0430\u043D\u0438\u0446\u0430!"
+  page: {fileID: 0}
 --- !u!65 &1241165052588080286
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112,5 +113,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 99.82793, y: 100.53914, z: 1}
-  m_Center: {x: -0.0132882, y: -0.009968162, z: 0}
+  m_Size: {x: 99.82791, y: 100.53913, z: 3.3121195}
+  m_Center: {x: -0.013289807, y: -0.00996816, z: -0.17455365}
+--- !u!54 &3532514992302261828
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7594692903559230684}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0

@@ -9,50 +9,78 @@ using System;
 public class PhoneDisk : MonoBehaviour
 {
     public GameObject lim;
-    public LayerMask l;
-    public Image background, thisback;
+    public LayerMask l, l1;
+    public Image background, lamp;
     public string phones;
     public static bool nol = true;
     public TextMeshProUGUI text;
-    public Dictionary<string, PhoneCall> calls;
+    public static Dictionary<string, PhoneCall> calls, extra;
     public TextMeshProUGUI conv;
     public GameObject spawner;
-    public PhoneCall[] ph;
+    public PhoneCall[] ph, ex;
     public PhoneCall exit;
+    public Sprite s;
+    bool c;
+    public bool actPr;
+    public static int time = -1;
+    GameObject o;
     private void Start()
     {
         calls = new Dictionary<string, PhoneCall>();
-        calls.Add("19415", ph[0]);
+        extra = new Dictionary<string, PhoneCall>();
+        extra.Add("19415", ex[0]);
     }
-    void Update()
+    public void Update()
     {
+        actPr = Active_option.problem;
+        if (time == -1 && Active_option.problem == true)
+        {
+            time = 3;
+        }
+        else if (time <= 0 && Active_option.problem == true)
+        {
+            Fines.fines += 1;
+            Active_option.problem = false;
+            time = -1;
+            lamp.sprite = s;
+        }
+        c = RotationPhone.can;
         text.text = phones;
         Ray r = new Ray(lim.transform.position, new Vector3(0, 0, 1) * 100);
-        if(Physics.Raycast(r, out RaycastHit hit, 10000, l) && RotationPhone.can == true)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(r, out RaycastHit hit, 10000, l) && c == true)
         {
-            if (hit.collider.transform.rotation.eulerAngles.z <= 34 && hit.collider.transform.rotation.eulerAngles.z > 5 && nol == true && phones.Length < 5)
+            o = hit.collider.gameObject;
+            if (o.transform.rotation.eulerAngles.z <= 34 && o.transform.rotation.eulerAngles.z > 5 && nol == true && phones.Length < 5)
             {
                 phones += 0;
                 nol = false;
             }
             else
             {
-                if(Input.GetMouseButtonUp(0) == true && RotationPhone.can == true && phones.Length < 5)
+                if (Input.GetMouseButtonUp(0) && phones.Length < 5 && Physics.Raycast(ray, 10000, l1))
                 {
-                    phones += hit.collider.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text;
+                    phones += o.transform.GetComponent<NumberOnPhone>().num.ToString();
                 }
             }
         }
-    }
-    public void StartDisk()
-    {
-        thisback.gameObject.SetActive(true);
-        thisback.transform.SetAsLastSibling();
-        phones = "";
+        else
+        {
+            o = null;
+        }
     }
     public void Phone()
     {
-        if(calls.Keys.Contains(phones))
+        if (Active_option.problem == true && extra.Keys.Contains(phones) && time != 0)
+        {
+            background.gameObject.SetActive(true);
+            extra[phones].Starter(conv, spawner);
+            StartCoroutine(TypeSyble(conv, extra[phones].NPConversations));
+            phones = "";
+            Active_option.problem = false;
+            lamp.sprite = s;
+        }
+        else if (calls.Keys.Contains(phones))
         {
             background.gameObject.SetActive(true);
             calls[phones].Starter(conv, spawner);

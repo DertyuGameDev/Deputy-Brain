@@ -10,6 +10,8 @@ public class Clock : MonoBehaviour
 {
     public static bool CanGo = true;
     public static int day = 0;
+    public static bool sleepwake = true;
+    public float delay = 1;
     public int d;
     public TextMeshProUGUI clock;
     public Image newDay;
@@ -23,6 +25,7 @@ public class Clock : MonoBehaviour
     public static int ind = 0;
     public static int indPhone = 0;
     public static Action<int, int> f;
+    public bool cg, sl;
     void Start()
     {
         f += OnTimeTracker;
@@ -35,30 +38,19 @@ public class Clock : MonoBehaviour
     {
         if (CanGo)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(delay);
             if (hour == 15 && second == 0)
             {
                 indPhone += 1;
                 phone.SetActive(true);
             }
-            if(hour == 7 && second == 0)
-            {
-                dRAGdROP.s = scene[ind];
-                ind += 1;
-                if (day > 1)
-                {
-                    GameObject p = Instantiate(Energy, spawner);
-                    p.transform.SetParent(spawner.transform);
-                    p.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
-                }
-                GameObject p1 = Instantiate(Page, spawner);
-                p1.transform.SetParent(spawner.transform);
-                p1.GetComponent<dRAGdROP>().page = pages[ind - 1];
-                p1.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
-            }
             if (hour == 23)
             {
+                sleepwake = true;
+                dRAGdROP.s = scene[ind];
+                ind += 1;
                 Instantiate(Kaseta, spawner);
+                Instantiate(Energy, spawner);
                 CanGo = false;
             }
             if (CanGo)
@@ -71,27 +63,50 @@ public class Clock : MonoBehaviour
                     MinusTime();
                 }
             }
+            if (hour == 7 && second == 0)
+            {
+                sleepwake = true;
+                if (day > 1)
+                {
+                    GameObject p = Instantiate(Energy, spawner);
+                    p.transform.SetParent(spawner.transform);
+                    p.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                }
+                GameObject p1 = Instantiate(Page, spawner);
+                p1.transform.SetParent(spawner.transform);
+                p1.GetComponent<dRAGdROP>().page = pages[ind - 1];
+                p1.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+            }
             StartCoroutine(timeTicker());
         }
     }
     void Update()
     {
+        sl = sleepwake;
+        cg = CanGo;
         d = day;
         clock.text = hour.ToString("D2") + ":" + second.ToString("D2");
     }
     public void OnTimeTracker(int h, int s)
     {
-        CanGo = true;
-        StartCoroutine(timeTicker());
-        second = s;
-        hour = h;
-        newDay.gameObject.SetActive(false);
+        if (Clock.hour < 23)
+        {
+            CanGo = true;
+            StartCoroutine(timeTicker());
+            second = s;
+            hour = h;
+            newDay.gameObject.SetActive(false);
+        }
     }
     public void MinusTime()
     {
         if(Active_option.activeEvent != null)
         {
             Active_option.activeEvent.timeHour -= 1;
+        }
+        if (Active_option.problem == true)
+        {
+            PhoneDisk.time -= 1;
         }
     }
 }

@@ -18,10 +18,12 @@ public class Active_option : MonoBehaviour
     List<int> position;
     public static Event activeEvent;
     public Event a;
-    public GameObject p, phone;
+    public GameObject p;
     public static bool problem;
-    public PhoneCall[] phoneCall;
-    public static PhoneCall actPhoneCall;
+    private void Start()
+    {
+        problem = false;
+    }
     private void Update()
     {
         a = activeEvent;
@@ -82,7 +84,7 @@ public class Active_option : MonoBehaviour
             bool IsOk = true;
             for (int i = 0; i < details.Count; i++)
             {
-                if (details[i].transform.parent.parent.name != "Grid")
+                if (details[i].transform.parent.parent.name != "Grid" && position[i] != -1)
                 {
                     IsOk = false;
                     break;
@@ -110,17 +112,14 @@ public class Active_option : MonoBehaviour
                 timer = 0;
                 details = null;
                 position = null;
-                int r = 51;
+                int r = Random.Range(1, 101);
                 if (r > 50)
                 {
                     problem = true;
-                    actPhoneCall = phoneCall[0];
-                    phone.SetActive(true);
                 }
                 else
                 {
                     problem = false;
-                    actPhoneCall = null;
                     StartCoroutine(color(green, gray));
                 }
                 slider.value = 0;

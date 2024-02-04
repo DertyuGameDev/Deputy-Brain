@@ -43,7 +43,7 @@ public class Item : MonoBehaviour
                     Drag.transform.localPosition = Vector3.zero;
                     Drag.transform.rotation = Quaternion.Euler(pos);
                     Drag.transform.parent.SetAsLastSibling();
-                    if (Drag.name == "T")
+                    if (Drag.name == "Eda" || Drag.name == "Sleep")
                     {
                         Drag.transform.GetChild(7).GetComponent<Slider>().enabled = true;
                     }
@@ -55,6 +55,11 @@ public class Item : MonoBehaviour
                     {
                         Drag.transform.GetChild(7).GetComponent<Slider>().enabled = true;
                     }
+                    else if (Drag.name == "оя")
+                    {
+                        Drag.transform.GetChild(5).GetComponent<Slider>().enabled = true;
+                    }
+
                     Drag = null;
                     pos = new Vector3(0, 0, 0);
                     Onec = true;
@@ -82,7 +87,7 @@ public class Item : MonoBehaviour
                         Drag.transform.SetAsLastSibling();
                         Drag.transform.parent.SetAsLastSibling();
                         Drag.transform.parent.parent.SetAsLastSibling();
-                        if (Drag.name == "T")
+                        if (Drag.name == "Eda" || Drag.name == "Sleep")
                         {
                             Drag.transform.GetChild(7).GetComponent<Slider>().enabled = false;
                         }
@@ -93,6 +98,10 @@ public class Item : MonoBehaviour
                         else if (Drag.name == "йо")
                         {
                             Drag.transform.GetChild(7).GetComponent<Slider>().enabled = false;
+                        }
+                        else if (Drag.name == "оя")
+                        {
+                            Drag.transform.GetChild(5).GetComponent<Slider>().enabled = false;
                         }
                     }
                 }
@@ -107,6 +116,7 @@ public class Item : MonoBehaviour
                         Drag.transform.SetAsLastSibling();
                         Drag.transform.parent.SetAsLastSibling();
                         Drag.transform.parent.parent.SetAsLastSibling();
+                        Drag.gameObject.GetComponent<Rigidbody>().useGravity = false;
                     }
                 }
             }

@@ -8,9 +8,9 @@ public class RotationPhone : MonoBehaviour
     public float angle = 0;
     public float angleSecond = 0;
     public Collider col;
-    public static bool can;
-    public bool click, drag, obratno;
+    public static bool can, click, drag, obratno;
     public bool move;
+    public LayerMask l;
     void Update()
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -55,9 +55,6 @@ public class RotationPhone : MonoBehaviour
         }
         if (!drag && !click)
         {
-            can = false;
-            click = false;
-            drag = false;
             if (transform.eulerAngles.z > -2 && transform.eulerAngles.z < 2)
             {
                 transform.rotation = Quaternion.identity;

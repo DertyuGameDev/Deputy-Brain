@@ -32,26 +32,12 @@ public class StartDialogue : MonoBehaviour
     }
     public void Click()
     {
-        if (Active_option.problem == true)
-        {
-            PhoneCall problem = Active_option.actPhoneCall;
-            background.gameObject.SetActive(true);
-            problem.Starter(conv, spawner);
-            StartCoroutine(TypeSyble(conv, problem.NPConversations));
-            portrait.SetActive(true);
-            phone.SetActive(false);
-            Active_option.problem = false;
-            lamp.sprite = grey;
-        }
-        else
-        {
-            background.gameObject.SetActive(true);
-            ind = Clock.indPhone;
-            BaseStarters[ind].Starter(conv, spawner);
-            StartCoroutine(TypeSyble(conv, BaseStarters[ind].NPConversations));
-            portrait.SetActive(true);
-            phone.SetActive(false);
-        }
+        background.gameObject.SetActive(true);
+        ind = Clock.indPhone;
+        BaseStarters[ind].Starter(conv, spawner);
+        StartCoroutine(TypeSyble(conv, BaseStarters[ind].NPConversations));
+        portrait.SetActive(true);
+        phone.SetActive(false);
     }
     public void Continue(Transition newConv)
     {

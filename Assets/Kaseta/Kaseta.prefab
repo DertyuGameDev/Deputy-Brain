@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9053886756935310454}
   - component: {fileID: 9053886756935310455}
   - component: {fileID: 752419597366225012}
+  - component: {fileID: 3942767642721764032}
   m_Layer: 11
   m_Name: Kaseta
   m_TagString: Untagged
@@ -100,7 +101,7 @@ MonoBehaviour:
   book:
     serializedVersion: 2
     m_Bits: 0
-  text: 
+  page: {fileID: 0}
 --- !u!65 &752419597366225012
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -112,5 +113,21 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 122.701355, y: 100.53914, z: 1}
-  m_Center: {x: -0.065582275, y: -0.009967804, z: 0}
+  m_Size: {x: 122.70134, y: 100.53913, z: 2.283903}
+  m_Center: {x: -0.06558322, y: -0.00996816, z: -0.13536356}
+--- !u!54 &3942767642721764032
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9053886756935310457}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0

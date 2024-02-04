@@ -13,6 +13,7 @@ TagManager:
   - Sel
   - Shield
   - pages
+  - SLEEP
   layers:
   - Default
   - TransparentFX
@@ -26,7 +27,7 @@ TagManager:
   - Numb
   - Book
   - Eq
-  - 
+  - disk
   - 
   - 
   - 

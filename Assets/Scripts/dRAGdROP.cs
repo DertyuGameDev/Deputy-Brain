@@ -27,7 +27,7 @@ public class dRAGdROP : MonoBehaviour
         Ray r = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (ch == Change.kaseta)
         {
-            if (Physics.Raycast(r, out RaycastHit hit, 1000, l))
+            if (Physics.Raycast(r, out RaycastHit hit, 1000, l) )
             {
                 Television.scene = s;
                 Television.IsStart = true;
@@ -36,7 +36,9 @@ public class dRAGdROP : MonoBehaviour
             else
             {
                 rect.SetParent(spawn.transform);
-                rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                rect.transform.position = spawn.transform.position;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), 283);
                 i.raycastTarget = true;
             }
         }
@@ -50,7 +52,9 @@ public class dRAGdROP : MonoBehaviour
             else
             {
                 rect.SetParent(spawn.transform);
-                rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                rect.transform.position = spawn.transform.position;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), 283);
                 i.raycastTarget = true;
             }
         }
@@ -64,7 +68,9 @@ public class dRAGdROP : MonoBehaviour
             else
             {
                 rect.SetParent(spawn.transform);
-                rect.anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                rect.transform.position = spawn.transform.position;
+                this.gameObject.GetComponent<Rigidbody>().useGravity = true;
+                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), 283);
                 i.raycastTarget = true;
             }
         }

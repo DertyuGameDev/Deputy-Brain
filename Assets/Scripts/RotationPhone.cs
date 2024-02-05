@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class RotationPhone : MonoBehaviour
 {
-    public Vector3 screenPos;
-    public float angle = 0;
-    public float angleSecond = 0;
+    Vector3 screenPos;
+    float angle = 0;
+    float angleSecond = 0;
     public Collider col;
     public static bool can, click, drag, obratno;
-    public bool move;
+    bool move;
     public LayerMask l;
+    public float speed;
+    bool flag;
     void Update()
     {
         Vector3 mouse = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -36,25 +38,21 @@ public class RotationPhone : MonoBehaviour
                         screenPos = Camera.main.WorldToScreenPoint(transform.position);
                         Vector3 vec3 = Input.mousePosition - screenPos;
                         angle = (Mathf.Atan2(transform.right.y, transform.right.x) - Mathf.Atan2(vec3.y, vec3.x)) * Mathf.Rad2Deg;
+                        flag = true;
                     }
                 }
             }
-            else if (drag == true && can == true)
+            else if (drag == true && can == true && flag == true)
             {
-                if (Physics.Raycast(ray, out RaycastHit hit))
-                {
-                    if (hit.collider == col)
-                    {
-                        Vector3 vec3 = Input.mousePosition - screenPos;
-                        float angleL = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
-                        angleSecond = angleL;
-                        transform.rotation = Quaternion.Lerp(transform.rotation,Quaternion.Euler(new Vector3(0, 0, angleL + angle)), 0.1f);
-                    }
-                }
+                Vector3 vec3 = Input.mousePosition - screenPos;
+                float angleL = Mathf.Atan2(vec3.y, vec3.x) * Mathf.Rad2Deg;
+                angleSecond = angleL;
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angleL + angle)), 0.1f);
             }
         }
         if (!drag && !click)
         {
+            flag = false;
             if (transform.eulerAngles.z > -2 && transform.eulerAngles.z < 2)
             {
                 transform.rotation = Quaternion.identity;
@@ -63,12 +61,12 @@ public class RotationPhone : MonoBehaviour
             }
             if (transform.eulerAngles.z > 0)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 1)), Time.deltaTime * 100);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 1)), Time.deltaTime * speed);
                 move = false;
             }
             if (transform.eulerAngles.z < 0)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles - new Vector3(0, 0, 1)), Time.deltaTime * 100);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles - new Vector3(0, 0, 1)), Time.deltaTime * speed);
                 move = false;
             }
         }
@@ -83,14 +81,9 @@ public class RotationPhone : MonoBehaviour
                 move = true;
                 PhoneDisk.nol = true;
             }
-            if (transform.eulerAngles.z > 1)
+            if (transform.eulerAngles.z > 1 || transform.eulerAngles.z < 1)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 1)), Time.deltaTime * 100);
-                move = false;
-            }
-            if (transform.eulerAngles.z < 1)
-            {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles - new Vector3(0, 0, 1)), Time.deltaTime * 100);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, 0, 1)), Time.deltaTime * speed);
                 move = false;
             }
         }

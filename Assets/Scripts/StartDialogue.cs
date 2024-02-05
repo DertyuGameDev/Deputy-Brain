@@ -58,7 +58,6 @@ public class StartDialogue : MonoBehaviour
         }
         else
         {
-            Clock.f(Clock.hour, Clock.second);
             GameObject[] obj = GameObject.FindGameObjectsWithTag("OptionChoice");
             for (int i = 0; i < obj.Length; i++)
             {
@@ -68,6 +67,7 @@ public class StartDialogue : MonoBehaviour
             portrait.SetActive(false);
             background.gameObject.SetActive(false);
             pause.SetActive(false);
+            Clock.f(Clock.hour, Clock.second);
         }
     }
     public IEnumerator TypeSyble(TextMeshProUGUI conv, string sentense)

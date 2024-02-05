@@ -20,18 +20,23 @@ public class Clock : MonoBehaviour
     public List<GameObject> pages = new List<GameObject>();
     public Transform spawner;
     public Scene[] scene;
-    public GameObject phone, diskPhone;
+    public GameObject phone, diskPhone, pause;
     public Animator phoneAnim;
     public static int ind = 0;
     public static int indPhone = 0;
     public static Action<int, int> f;
     public bool cg, sl;
+    public int yspawn;
     void Start()
     {
         f += OnTimeTracker;
         second = 0;
         hour = 7;
         StartCoroutine(timeTicker());
+        GameObject p1 = Instantiate(Page, spawner);
+        p1.transform.SetParent(spawner.transform);
+        p1.GetComponent<dRAGdROP>().page = pages[ind];
+        p1.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-80, 80), yspawn);
     }
 
     public IEnumerator timeTicker()
@@ -49,8 +54,10 @@ public class Clock : MonoBehaviour
                 sleepwake = true;
                 dRAGdROP.s = scene[ind];
                 ind += 1;
-                Instantiate(Kaseta, spawner);
-                Instantiate(Energy, spawner);
+                GameObject k = Instantiate(Kaseta, spawner);
+                k.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-80, 80), yspawn);
+                GameObject l = Instantiate(Energy, spawner);
+                l.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-80, 80), yspawn);
                 CanGo = false;
             }
             if (CanGo)
@@ -70,12 +77,8 @@ public class Clock : MonoBehaviour
                 {
                     GameObject p = Instantiate(Energy, spawner);
                     p.transform.SetParent(spawner.transform);
-                    p.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
+                    p.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-80, 80), yspawn);
                 }
-                GameObject p1 = Instantiate(Page, spawner);
-                p1.transform.SetParent(spawner.transform);
-                p1.GetComponent<dRAGdROP>().page = pages[ind - 1];
-                p1.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(-104, 104), Random.Range(-169, 169));
             }
             StartCoroutine(timeTicker());
         }
@@ -91,10 +94,13 @@ public class Clock : MonoBehaviour
     {
         if (Clock.hour < 23)
         {
-            CanGo = true;
-            StartCoroutine(timeTicker());
-            second = s;
-            hour = h;
+            if (pause.activeSelf == false)
+            {
+                CanGo = true;
+                StartCoroutine(timeTicker());
+                second = s;
+                hour = h;
+            }
             newDay.gameObject.SetActive(false);
         }
     }

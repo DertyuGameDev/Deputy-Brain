@@ -26,6 +26,7 @@ public class Clock : MonoBehaviour
     public static int indPhone = 0;
     public static Action<int, int> f;
     public bool cg, sl;
+    public static int y;
     public int yspawn;
     void Start()
     {
@@ -85,6 +86,7 @@ public class Clock : MonoBehaviour
     }
     void Update()
     {
+        y = yspawn;
         sl = sleepwake;
         cg = CanGo;
         d = day;

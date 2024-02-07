@@ -12,7 +12,6 @@ public class dRAGdROP : MonoBehaviour
     RectTransform rect;
     GameObject canvas;
     GameObject spawn;
-    Image i;
     public Change ch;
     public LayerMask l, grid, book;
     public GameObject page;
@@ -38,8 +37,7 @@ public class dRAGdROP : MonoBehaviour
                 rect.SetParent(spawn.transform);
                 rect.transform.position = spawn.transform.position;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), 283);
-                i.raycastTarget = true;
+                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), Clock.y);
             }
         }
         else if (ch == Change.energy)
@@ -54,8 +52,7 @@ public class dRAGdROP : MonoBehaviour
                 rect.SetParent(spawn.transform);
                 rect.transform.position = spawn.transform.position;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), 283);
-                i.raycastTarget = true;
+                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), Clock.y);
             }
         }
         else if (ch == Change.page)
@@ -70,8 +67,7 @@ public class dRAGdROP : MonoBehaviour
                 rect.SetParent(spawn.transform);
                 rect.transform.position = spawn.transform.position;
                 this.gameObject.GetComponent<Rigidbody>().useGravity = true;
-                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), 283);
-                i.raycastTarget = true;
+                rect.anchoredPosition = new Vector2(Random.Range(-80, 80), Clock.y);
             }
         }
     }
@@ -80,6 +76,5 @@ public class dRAGdROP : MonoBehaviour
         rect = GetComponent<RectTransform>();
         spawn = this.transform.parent.gameObject;
         canvas = GameObject.FindGameObjectWithTag("Canvas");
-        i = GetComponent<Image>();
     }
 }
